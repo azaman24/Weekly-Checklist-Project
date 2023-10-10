@@ -1,0 +1,241 @@
+:root {
+    --gray: #46566e;
+    --dark_cyan: #1f2937;
+    --light_gray: #d3d3d3;
+    --white: #ffffff;
+    --yellow: #ffff00;
+    --orange: #ff6a00;
+    --red: #ff0000;
+    --dark_red: #8B0000;
+    --green: #00E35A;
+    --dark_green: #2E8930;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#doc-title { /*Format of Title*/
+    /*max-width: 800px;
+    width: 80%;*/
+    position: center;
+    width: 100%;
+    color: var(--light);
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--gray);
+    color: var(--white);
+}
+
+header {
+    padding: 2rem 1rem;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+#date { /* Format of the date*/
+    font-size: 1.5rem;
+    font-weight: 20;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#new-task-form {
+    display: flex;
+}
+
+input, button { /*sets the looks of what the user will input*/
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+#new-task-input {
+    flex: 1 1 0%;
+    background-color: var(--dark_cyan);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    color: var(--white);
+    font-size: 1.25rem;
+}
+
+#new-task-input {
+    color:var(--light_gray);
+}
+
+#new-task-submit {
+    color: var(--pink);
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--yellow), var(--orange));
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+#new-task-submit:hover {
+    opacity: 0.75;
+}
+
+#new-task-submit:active {
+    opacity: 0.5;
+}
+
+main {
+    flex: 1 1 0%;
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.task-list {
+    padding: 0.5rem;
+}
+
+.task-list h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color:var(--white);
+    margin-bottom: 1rem;
+}
+
+.dayList {
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.dayList .task {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--dark_cyan);
+    max-width: 800px;
+    width: 100%;
+    padding: 1.125rem;
+    border-radius: 1.125rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.dayList:hover {
+    opacity: 0.85;
+}
+.dayList:active {
+    opacity: 0.75;
+}
+
+.task .content {
+    flex: 1 1 0%;
+}
+
+.task .content .text {
+    font-size: 1.125rem;
+    color: var(--white);
+    width: 100%;
+    display: block;
+    transition: 0.4s;
+}
+
+.task .content .text:not(:read-only) {/* might get rid of this*/
+    color:var(--yellow);
+}
+
+.task .actions {
+    display: flex;
+    margin: 0 -0.5rem;
+}
+
+.task .actions button {
+    cursor: pointer;
+    margin: 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.4s;
+}
+
+.task .actions .edit {/*Edit button*/
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--yellow), var(--orange));
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.task .actions .completed {/*Completed button*/
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--yellow), var(--orange));
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.task .actions .delete {/*Delete button*/
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--red), var(--dark_red));
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*For Edit Button*/
+/*.task .actions .edit:hover {
+    opacity: 0.75;
+}
+
+.task .actions .edit:active {
+    opacity: 0.5;
+}*/
+
+.task .actions .completed:hover {
+    opacity: 0.75;
+}
+
+.task .actions .completed:active {
+    opacity: 0.5;
+}
+
+.task .actions .delete:hover {
+    opacity: 0.75;
+}
+
+.task .actions .delete:active {
+   opacity: 0.5;
+}
+
+.dayList { /* format of the days beneath the task-list */
+    flex: 1 1 0%;
+    background-color: var(--dark_cyan);
+    font-size: 1.5rem;
+    font-weight: 300;
+    color:var(--green);
+    padding: 1rem;
+    margin-left: -1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+}
