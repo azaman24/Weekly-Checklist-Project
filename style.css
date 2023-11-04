@@ -145,6 +145,37 @@ main {
     opacity: 0.75;
 }
 
+.checkActions .content {
+    flex: 1 1 0%;
+}
+
+.checkActions .content .text {
+    font-size: 1.125rem;
+    color: var(--white);
+    width: 100%;
+    display: block;
+    transition: 0.4s;
+}
+
+.unchecked {
+    cursor: pointer;
+    margin: 0 1rem;
+    background-image: url(images/Unchecked.png);
+    background-size: cover;
+    width: 30.5px;
+    height: 30.5px;
+}
+
+.checked {
+    cursor: pointer;
+    margin: 0 1rem;
+    background-image: url(images/Checked.png);
+    background-size: cover;
+    width: 30.5px;
+    height: 30.5px;
+}
+
+
 .task .content {
     flex: 1 1 0%;
 }
@@ -175,16 +206,7 @@ main {
     transition: 0.4s;
 }
 
-.task .actions .edit {/*Edit button*/
-    font-size: 1.25rem;
-    font-weight: 700;
-    background-image: linear-gradient(to right, var(--yellow), var(--orange));
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.task .actions .completed {/*Completed button*/
+.task .actions .complete {/*Completed button*/
     font-size: 1.25rem;
     font-weight: 700;
     background-image: linear-gradient(to right, var(--yellow), var(--orange));
@@ -202,20 +224,11 @@ main {
     -webkit-text-fill-color: transparent;
 }
 
-/*For Edit Button*/
-/*.task .actions .edit:hover {
+.task .actions .complete:hover {
     opacity: 0.75;
 }
 
-.task .actions .edit:active {
-    opacity: 0.5;
-}*/
-
-.task .actions .completed:hover {
-    opacity: 0.75;
-}
-
-.task .actions .completed:active {
+.task .actions .complete:active {
     opacity: 0.5;
 }
 
@@ -235,7 +248,52 @@ main {
     color:var(--green);
     padding: 1rem;
     margin-left: -1rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
     border-radius: 1rem;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    color: #000;
+    background-image: url(images/Unchecked.png);
+    background-size: cover;
+    background-position: center;
+    top: 12px;
+    left: 8px;
+}
+
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+}
+
+ul li.checked::before {
+    background-image: url(images/Checked.png);
+    color: #000;
+}
+
+ul li.checked::after {
+    color: #555;
+    background-image: url(images/Checked.png);
+    text-decoration: line-through;
+}
+
+ul li span {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #555;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+ul li span:hover {
+    background: #edeef0;
 }
