@@ -9,16 +9,6 @@ window.addEventListener('load', ()=> {
         ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "Decemeber"];
     let date = `${weekday[today.getDay()]}, ${(c_month[today.getMonth()])}/${today.getDate()}/${today.getFullYear()}`;
     document.getElementById("date").innerHTML = date; // Displays the current date.
-    
-    //Learn how to save data
-    let name = "SRK";
-    let age = "58";
-    let person = {name: "John", age:25};
-    localStorage.setItem("username", "bob_ross");
-    let username = window.localStorage.getItem("username");
-    console.log(name);
-    console.log(person.name);
-    console.log(username);
 
     const allDays = document.getElementsByClassName("dayList");
     const monday = document.getElementById("dayOne");
@@ -59,6 +49,7 @@ window.addEventListener('load', ()=> {
 
     form.addEventListener('submit', (e)=> {
         e.preventDefault(); //prevents page from reloading
+        const checkBoxes = input.value;
         const task = input.value;
 
         if (!task) { //prints the statement below if task is empty
@@ -69,8 +60,14 @@ window.addEventListener('load', ()=> {
         if (listDays == document.querySelector("none")) {
             alert ("Please select a day");
             return;
-        };    
-    
+        };
+
+        const checkActions = document.createElement("div");
+        checkActions.classList.add("checkActions");
+
+        const checkBox = document.createElement("button");
+        checkBox.classList.add("unchecked");
+
         const taskItem = document.createElement("div");
         taskItem.classList.add("task"); //sets the div's class to "task"
 
@@ -87,10 +84,7 @@ window.addEventListener('load', ()=> {
 
         const taskText = taskInput.value.trim();
         let existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        //existingTasks.push(taskText);  // adds another task to the array
-        //localStorage.setItem("tasks", JSON.stringify(existingTasks));
-        //let dataDay1 = localStorage.getItem("tasks");
-        //console.log(storedData);
+
 
         const taskActions = document.createElement("div");
         taskActions.classList.add("actions"); //creates a class in which the edit button and delete button will be under.
@@ -101,27 +95,33 @@ window.addEventListener('load', ()=> {
         //task_edit.classList.add("edit");
         //task_edit.innerHTML = "Edit";
 
-        const taskCompleted = document.createElement("button");
-        taskCompleted.classList.add("completed");
-        taskCompleted.innerHTML = "Completed";
+        const taskComplete = document.createElement("button");
+        taskComplete.classList.add("complete");
+        taskComplete.innerHTML = "Complete";
 
         const taskDelete = document.createElement("button");
         taskDelete.classList.add("delete");
         taskDelete.innerHTML = "Delete";
 
+        let li = document.createElement("li");
+        li.classList.add("unchecked");
+
+        // if (listDays == document.querySelector("#"))
+
         //taskActions.appendChild(task_edit);
-        taskActions.appendChild(taskCompleted);
+        taskActions.appendChild(checkBox);
+        taskActions.appendChild(taskComplete);
         taskActions.appendChild(taskDelete);
         taskItem.appendChild(taskActions);
         listDays.appendChild(taskItem);
         input.value = "";
 
         //Code for saving the tasks
-        const taskInputX = document.getElementById("taskInput");
-        const taskTextX = taskInputX.value.trim();
-        const existingTasksX = JSON.parse(localStorage.getItem("tasks")) || [];
-        existingTasksX.push(taskTextX);  // adds another task to the array
-        localStorage.setItem("tasks", JSON.stringify(existingTasksX));
+        // const taskInputX = document.getElementById("taskInput");
+        // const taskTextX = taskInputX.value.trim();
+        // const existingTasksX = JSON.parse(localStorage.getItem("tasks")) || [];
+        // existingTasksX.push(taskTextX);  // adds another task to the array
+        // localStorage.setItem("tasks", JSON.stringify(existingTasksX));
 
         // function displayTasks() {
         //     const taskListX = document.getElementById("taskList");
@@ -167,18 +167,6 @@ window.addEventListener('load', ()=> {
         sunday.addEventListener('click', ()=> {
             listDays = document.querySelector("#daySeven");
         }); 
-    
-        function displayTasks() {
-            const taskList = document.getElementById("taskList");
-            taskList.innerHTML = "";
-            const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-            tasks.forEach(task => {
-                const li = document.createElement("li");
-                li.textContent = task;
-                taskList.appendChild(li);
-            });
-        }
-        displayTasks();
         
         //code for Edit Button
         //task_edit.addEventListener('click', ()=> {
@@ -193,9 +181,21 @@ window.addEventListener('load', ()=> {
         //    }
         //});
 
-        taskCompleted.addEventListener('click', ()=> {
-            let completedTasks = storedTasks;
-            console.log(completedTasks);
+        checkBox.addEventListener('click', ()=> {
+            checkBox.className = "checked";
+            console.log(checkBox.className)
+        });
+
+        taskComplete.addEventListener('click', ()=> {
+            if (taskComplete.innerText.toLowerCase() == "complete") {
+                taskComplete.innerText = "Completed";
+            }
+            if (e.target.tagName === "LI") {
+                e.target.classList.toggle("checked");
+                console.log(e.target.classList);
+            }
+            // let completedTasks = storedTasks;
+            // console.log(completedTasks);
         });
         
         taskDelete.addEventListener('click', ()=> {
@@ -204,36 +204,36 @@ window.addEventListener('load', ()=> {
     })
     function displayTasks() {
         const taskListX = document.getElementById("taskList");
-        taskListX.innerHTML = "";
+        //taskListX.innerHTML = "";
         const tasksX = JSON.parse(localStorage.getItem("tasks")) || [];
         tasksX.forEach(task => {
             const li = document.createElement("li");
             li.textContent = task;
-            taskListX.appendChild(li);
+            //taskListX.appendChild(li);
         });
     }
     displayTasks();
-    taskInput.value = "";
+    //taskInput.value = "";
 })
 
 //other sources
 const inputBox = document.getElementById("taskInput");
 const list1Container = document.getElementById("dayOne");
 
-function addTask() {
-    if (inputBox === "") {
-        alert("You must write something!")
-    }
-    else {
-        let list1 = document.createElement("li");
-        list1.innerHTML = inputBox.value;
-        list1Container.appendChild(list1);
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        list1.appendChild(span);
-    }
-    inputBox.value = "";
-}
+// function addTask() {
+//     if (inputBox === "") {
+//         alert("You must write something!")
+//     }
+//     else {
+//         let list1 = document.createElement("li");
+//         list1.innerHTML = inputBox.value;
+//         list1Container.appendChild(list1);
+//         let span = document.createElement("span");
+//         span.innerHTML = "\u00d7";
+//         list1.appendChild(span);
+//     }
+//     inputBox.value = "";
+// }
 
 
 let previousButton = null;
