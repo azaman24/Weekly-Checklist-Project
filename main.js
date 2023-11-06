@@ -62,17 +62,11 @@ window.addEventListener('load', ()=> {
             return;
         };
 
-        const checkActions = document.createElement("div");
-        checkActions.classList.add("checkActions");
-
-        const checkBox = document.createElement("button");
-        checkBox.classList.add("unchecked");
-
         const taskItem = document.createElement("div");
         taskItem.classList.add("task"); //sets the div's class to "task"
 
         const taskContent = document.createElement("div");
-        taskContent.classList.add("content");
+        taskContent.classList.add("uncheckedContent");
         taskItem.appendChild(taskContent);
 
         const taskInput = document.createElement("input");        
@@ -88,20 +82,28 @@ window.addEventListener('load', ()=> {
 
         const taskActions = document.createElement("div");
         taskActions.classList.add("actions"); //creates a class in which the edit button and delete button will be under.
-        //let storedTasks = task; //puts the task in the storedTasks variable
-        //console.log(storedTasks);
+
         //previous code for Edit Button
         //const task_edit = document.createElement("button");
         //task_edit.classList.add("edit");
         //task_edit.innerHTML = "Edit";
 
-        const taskComplete = document.createElement("button");
-        taskComplete.classList.add("complete");
-        taskComplete.innerHTML = "Complete";
+        const checkActions = document.createElement("div");
+        checkActions.classList.add("checkActions");
 
-        const taskDelete = document.createElement("button");
-        taskDelete.classList.add("delete");
-        taskDelete.innerHTML = "Delete";
+        const checkBox = document.createElement("button"); /* Alternative complete button */
+        checkBox.classList.add("unchecked");
+
+        // const taskComplete = document.createElement("button");
+        // taskComplete.classList.add("complete");
+        // taskComplete.innerHTML = "Complete";
+
+        const crossBox = document.createElement("button"); /* Alternative delete button */
+        crossBox.classList.add("crossOff");
+
+        // const taskDelete = document.createElement("button");
+        // taskDelete.classList.add("delete");
+        // taskDelete.innerHTML = "Delete";
 
         let li = document.createElement("li");
         li.classList.add("unchecked");
@@ -110,8 +112,9 @@ window.addEventListener('load', ()=> {
 
         //taskActions.appendChild(task_edit);
         taskActions.appendChild(checkBox);
-        taskActions.appendChild(taskComplete);
-        taskActions.appendChild(taskDelete);
+        taskActions.appendChild(crossBox);
+        // taskActions.appendChild(taskComplete);
+        // taskActions.appendChild(taskDelete);
         taskItem.appendChild(taskActions);
         listDays.appendChild(taskItem);
         input.value = "";
@@ -182,23 +185,32 @@ window.addEventListener('load', ()=> {
         //});
 
         checkBox.addEventListener('click', ()=> {
-            checkBox.className = "checked";
-            console.log(checkBox.className)
+            checkBox.className = "checked"; /* Changes image from unchecked to checked. */
+            //taskComplete.className = "completed";
+            taskContent.className = "checkedContent";
+            console.log(taskContent.className);
+            // if (taskComplete.innerText.toLowerCase() == "complete") {
+            //     taskComplete.innerText = "Completed";
+            // }
         });
 
-        taskComplete.addEventListener('click', ()=> {
-            if (taskComplete.innerText.toLowerCase() == "complete") {
-                taskComplete.innerText = "Completed";
-            }
-            if (e.target.tagName === "LI") {
-                e.target.classList.toggle("checked");
-                console.log(e.target.classList);
-            }
-            // let completedTasks = storedTasks;
-            // console.log(completedTasks);
-        });
+        // taskComplete.addEventListener('click', ()=> {
+        //     if (taskComplete.innerText.toLowerCase() == "complete") {
+        //         taskComplete.innerText = "Completed";
+        //     }
+        //     if (e.target.tagName === "LI") {
+        //         e.target.classList.toggle("checked");
+        //         console.log(e.target.classList);
+        //     }
+        //     // let completedTasks = storedTasks;
+        //     // console.log(completedTasks);
+        // });
         
-        taskDelete.addEventListener('click', ()=> {
+        // taskDelete.addEventListener('click', ()=> {
+        //     listDays.removeChild(taskItem);
+        // });
+
+        crossBox.addEventListener('click', ()=> {
             listDays.removeChild(taskItem);
         });
     })
@@ -239,7 +251,7 @@ const list1Container = document.getElementById("dayOne");
 let previousButton = null;
 
 function changeColor(current) {
-    current.style.color = '#ff6a00'; // The clicked/selected button is this color.
+    current.style.color = '#00FFFF'; // The clicked/selected button is this color.
     if (previousButton != null){
         previousButton.style.color = '#00E35A'; // The unselected button is this color.
     }
