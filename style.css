@@ -1,14 +1,15 @@
 :root {
-    --gray: #46566e;
-    --dark_cyan: #1f2937;
-    --light_gray: #d3d3d3;
-    --white: #ffffff;
-    --yellow: #ffff00;
-    --orange: #ff6a00;
-    --red: #ff0000;
-    --dark_red: #8B0000;
+    --gray: #46566E;
+    --darkCyan: #1F2937;
+    --lightGray: #D3D3D3;
+    --white: #FFF;
+    --neonYellow: #FBEC5D;
+    --yellow: #FFF000;
+    --orange: #FF6A00;
+    --red: #FF0000;
+    --darkRed: #8B0000;
     --green: #00E35A;
-    --dark_green: #2E8930;
+    --darkGreen: #2E8930;
 }
 
 * {
@@ -69,23 +70,22 @@ input, button { /*sets the looks of what the user will input*/
 
 #new-task-input {
     flex: 1 1 0%;
-    background-color: var(--dark_cyan);
+    background-color: var(--darkCyan);
     padding: 1rem;
     border-radius: 1rem;
     margin-right: 1rem;
-    color: var(--white);
     font-size: 1.25rem;
 }
 
 #new-task-input {
-    color:var(--light_gray);
+    color:var(--lightGray);
 }
 
 #new-task-submit {
     color: var(--pink);
     font-size: 1.25rem;
     font-weight: 700;
-    background-image: linear-gradient(to right, var(--yellow), var(--orange));
+    background-image: linear-gradient(to right, var(--neonYellow), var(--yellow));
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -115,8 +115,8 @@ main {
 
 .task-list h2 {
     font-size: 2rem;
-    font-weight: 300;
-    color:var(--white);
+    text-transform: uppercase;
+    font-weight: 1000;
     margin-bottom: 1rem;
 }
 
@@ -128,7 +128,7 @@ main {
 .dayList .task {
     display: flex;
     justify-content: space-between;
-    background-color: var(--dark_cyan);
+    background-color: var(--darkCyan);
     max-width: 800px;
     width: 100%;
     padding: 1.125rem;
@@ -161,31 +161,55 @@ main {
     cursor: pointer;
     margin: 0 1rem;
     background-image: url(images/Unchecked.png);
-    background-size: cover;
-    width: 30.5px;
-    height: 30.5px;
+    background-size: 32.5px;
+    width: 32.5px;
+    height: 32.5px;
+}
+
+.unchecked:hover {
+    background-image: url(images/UncheckedHover.png);
 }
 
 .checked {
-    cursor: pointer;
-    margin: 0 1rem;
     background-image: url(images/Checked.png);
-    background-size: cover;
-    width: 30.5px;
-    height: 30.5px;
+    background-size: 32.5px;
+    width: 32.5px;
+    height: 32.5px;
 }
 
+.crossOff {
+    cursor: pointer;
+    margin: 0 1rem;
+    background-image: url(images/Delete.png);
+    background-size: 32.5px;
+    width: 32.5px;
+    height: 32.5px;
+}
+
+.crossOff:hover {
+    background-image: url(images/DeleteHover.png);
+}
 
 .task .content {
     flex: 1 1 0%;
 }
 
-.task .content .text {
+.task .uncheckedContent .text {
     font-size: 1.125rem;
     color: var(--white);
-    width: 100%;
+    width: 95%;
+    text-overflow: ellipsis;
     display: block;
     transition: 0.4s;
+}
+.task .checkedContent .text {
+    font-size: 1.125rem;
+    color: #888;
+    width: 95%;
+    text-decoration: line-through;
+    text-overflow: ellipsis;
+    display: block;
+    transition: 0.3s;
 }
 
 .task .content .text:not(:read-only) {/* might get rid of this*/
@@ -206,10 +230,19 @@ main {
     transition: 0.4s;
 }
 
-.task .actions .complete {/*Completed button*/
+.task .actions .complete {/*Complete button*/
     font-size: 1.25rem;
     font-weight: 700;
-    background-image: linear-gradient(to right, var(--yellow), var(--orange));
+    background-color: var(--white);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.task .actions .completed {
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--green), var(--darkGreen));
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -218,19 +251,19 @@ main {
 .task .actions .delete {/*Delete button*/
     font-size: 1.25rem;
     font-weight: 700;
-    background-image: linear-gradient(to right, var(--red), var(--dark_red));
+    background-image: linear-gradient(to right, var(--red), var(--darkRed));
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.task .actions .complete:hover {
+/* .task .actions .complete:hover {
     opacity: 0.75;
 }
 
 .task .actions .complete:active {
     opacity: 0.5;
-}
+} */
 
 .task .actions .delete:hover {
     opacity: 0.75;
@@ -242,7 +275,7 @@ main {
 
 .dayList { /* format of the days beneath the task-list */
     flex: 1 1 0%;
-    background-color: var(--dark_cyan);
+    background-color: var(--darkCyan);
     font-size: 1.5rem;
     font-weight: 300;
     color:var(--green);
@@ -265,21 +298,6 @@ ul li::before {
     left: 8px;
 }
 
-ul li.checked {
-    color: #555;
-    text-decoration: line-through;
-}
-
-ul li.checked::before {
-    background-image: url(images/Checked.png);
-    color: #000;
-}
-
-ul li.checked::after {
-    color: #555;
-    background-image: url(images/Checked.png);
-    text-decoration: line-through;
-}
 
 ul li span {
     position: absolute;
