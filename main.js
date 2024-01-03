@@ -1,43 +1,40 @@
-// SELECT ELEMENTS
-// SELECT ELEMENTS
 window.addEventListener('load', ()=> {
-    // SELECT ELEMENTS
-    const form = document.getElementById('todoform');
-    const taskInput = document.getElementById('newtodo');
-    const todosListEl = document.getElementById('todos-list');
-    const notificationEl = document.querySelector('.notification');
-    const buttons = document.querySelectorAll(".dayList");
-    
-    buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        buttons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-      })
+  const form = document.getElementById('todoform');
+  const taskInput = document.getElementById('newtodo');
+  const todosListEl = document.getElementById('todos-list');
+  const notificationEl = document.querySelector('.notification');
+  const buttons = document.querySelectorAll(".dayList");
+  let daySelected = null;
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      buttons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
     })
-    // VARS
-    let todos = JSON.parse(localStorage.getItem('todos')) || [];
-        let EditTaskId = -1;
+  })
+  
+  // todos are the tasks that the user puts into the checklist
+  let todos = JSON.parse(localStorage.getItem('todos')) || [];
+  let EditTaskId = -1;
+  
+  // updates the checklist with any tasks previously saved
+  renderTodos();
       
-    // 1st render
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    saveTodo();
     renderTodos();
+    localStorage.setItem('todos', JSON.stringify(todos));
+  });
       
-    // FORM SUBMIT
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
+  // saves tasks that the user adds to checklist
+  function saveTodo() {
+    const todoValue = taskInput.value;
+    
+    // check if the task list is empty
+    const emptyTask = todoValue === '';
       
-      saveTodo();
-      renderTodos();
-      localStorage.setItem('todos', JSON.stringify(todos));
-    });
-      
-    // SAVE TODO
-    function saveTodo() {
-      const todoValue = taskInput.value;
-      
-      // check if the todo is empty
-      const emptyTask = todoValue === '';
-      
-      // check for duplicate todos
+    // check for duplicate task list
       const presentTask = todos.some((todo) => todo.value.toUpperCase() === todoValue.toUpperCase());
       
       if (emptyTask) {
@@ -57,42 +54,42 @@ window.addEventListener('load', ()=> {
             checked: false,
             color: '#' + Math.floor(Math.random() * 16777215).toString(16),
           });
-    }
+        }
       
-    taskInput.value = '';
-    }
-    }
-      
-    // RENDER TODOS
-    function renderTodos() {
-      if (todos.length === 0) {
-        todosListEl.innerHTML = '<center>No tasks to do!</center>';
-        return;
+        taskInput.value = '';
       }
-      
-      // CLEAR ELEMENT BEFORE A RE-RENDER
-      todosListEl.innerHTML = '';
-  
-      // RENDER TODOS
-      todos.forEach((todo, index) => {
-        todosListEl.innerHTML += `
-        <div class="todo" id=${index}>
-          <p class="${todo.checked ? 'checked' : ''}" data-action="check">${todo.value}</p>
-          <i class="${todo.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-          <i class="deleteButton" data-action="delete"></i>
-        </div>
-        `;
-      });
     }
+      
+    // updates the list of saved tasks
+  function renderTodos() {
+    if (todos.length === 0) {
+      todosListEl.innerHTML = '<center>No tasks to do!</center>';
+      return;
+    }
+      
+    // clears the list before performing a re-render
+    todosListEl.innerHTML = '';
+  
+    // the structure of each task
+    todos.forEach((todo, index) => {
+      todosListEl.innerHTML += `
+        <div class="todo" id=${index}>
+        <p class="${todo.checked ? 'checked' : ''}" data-action="check">${todo.value}</p>
+        <i class="${todo.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
+        <i class="deleteButton" data-action="delete"></i>
+        </div>
+      `;
+    });
+  }
       
     // CLICK EVENT LISTENER FOR ALL THE TODOS
-    todosListEl.addEventListener('click', (event) => {
+  todosListEl.addEventListener('click', (event) => {
     const target = event.target;
     const parentElement = target.parentNode;
       
     if (parentElement.className !== 'todo') return;
       
-    // t o d o id
+    // todo id
     const todo = parentElement;
     const todoId = Number(todo.id);
       
@@ -102,39 +99,38 @@ window.addEventListener('load', ()=> {
     action === 'check' && checkTodo(todoId);
     action === 'edit' && editTodo(todoId);
     action === 'delete' && deleteTodo(todoId);
-    });
+  });
       
-    // CHECK A TODO
-    function checkTodo(todoId) {
-      todos = todos.map((todo, index) => ({
-        ...todo,
-        checked: index === todoId ? !todo.checked : todo.checked,
-      }));
-      renderTodos();
-      localStorage.setItem('todos', JSON.stringify(todos));
-    }
+  // checks off a task
+  function checkTodo(todoId) {
+    todos = todos.map((todo, index) => ({
+      ...todo,
+      checked: index === todoId ? !todo.checked : todo.checked,
+    }));
+    renderTodos();
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
       
-    // DELETE TODO
-    function deleteTodo(todoId) {
-      todos = todos.filter((todo, index) => index !== todoId);
-      EditTaskId = -1;
+  // deletes a task
+  function deleteTodo(todoId) {
+    todos = todos.filter((todo, index) => index !== todoId);
+    EditTaskId = -1;
   
-      // re-render
-      renderTodos();
-      localStorage.setItem('todos', JSON.stringify(todos));
-    }
+    // re-render
+    renderTodos();
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
       
-    // SHOW A NOTIFICATION
-    function showNotification(msg) {
-      // change the message
-      notificationEl.innerHTML = msg;
+  // shows a notification
+  function showNotification(msg) {
+    notificationEl.innerHTML = msg;
   
-      // notification enter
-      notificationEl.classList.add('notif-enter');
+    // notification enters the screen
+    notificationEl.classList.add('notif-enter');
   
-      // notification leave
-      setTimeout(() => {
-        notificationEl.classList.remove('notif-enter');
-      }, 2000);
-    }
-  })
+    // notification leaves the screen
+    setTimeout(() => {
+      notificationEl.classList.remove('notif-enter');
+    }, 1100);
+  }
+})
