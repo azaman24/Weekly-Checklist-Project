@@ -236,7 +236,7 @@
     opacity: 0.9;
   
     border-radius: 8px;
-    background-color: var(--green);
+    background-color: var(--red);
     top: 10px;
     right: calc(-3 * var(--container-width) / 4);
   
