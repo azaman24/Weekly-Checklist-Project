@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weekly Checklist App</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" /> -->
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="images/Weekly_Checklist_Icon.png" type="image/x-icon"/>
   </head>
@@ -13,29 +13,34 @@
     <div class="container">
         <header>
             <div class="header">
-                <h1 id="doc-title">Weekly Checklist App</h1>
+              <img src="images/Weekly_Checklist.png" id="imgTitle">  
+              <h1 id="imgCentering"></h1>
             </div>
 
-            <div class="new-todo">
-                <form id="todoform">
-                    <input type="text" name="newtodo" id="newtodo" placeholder="What tasks do you have?" />
+            <div class="newTask">
+                <form id="taskForm">
+                    <input type="text" id="newTask" placeholder="What tasks do you have?" />
                     <button type="submit" id="submitButton"></button>
                 </form>
             </div>
         </header>
-        <div class="dayList" id="dayOne" onclick="changeColor(this)">Monday</div>
-        <div class="dayList" id="dayTwo" onclick="changeColor(this)">Tuesday</div>
-        <div class="dayList" id="dayThree" onclick="changeColor(this)">Wednesday</div>
-        <div class="dayList" id="dayFour" onclick="changeColor(this)">Thursday</div>
-        <div class="dayList" id="dayFive" onclick="changeColor(this)">Friday</div>
-        <div class="dayList" id="daySix" onclick="changeColor(this)">Saturday</div>
-        <div class="dayList" id="daySeven" onclick="changeColor(this)">Sunday</div>
+        <!-- <p id="noDayChosen">Please select a day to view its tasks.</p> -->
+        <div class="dayList" id="dayOne">Monday</div>
+        <div id="tasksListMonday"></div>
+        <div class="dayList" id="dayTwo">Tuesday</div>
+        <div id="tasksListTuesday"></div>
+        <div class="dayList" id="dayThree">Wednesday</div>
+        <div id="tasksListWednesday"></div>
+        <div class="dayList" id="dayFour">Thursday</div>
+        <div id="tasksListThursday"></div>
+        <div class="dayList" id="dayFive">Friday</div>
+        <div id="tasksListFriday"></div>
+        <div class="dayList" id="daySix">Saturday</div>
+        <div id="tasksListSaturday"></div>
+        <div class="dayList" id="daySeven">Sunday</div>
+        <div id="tasksListSunday"></div>
 
-        <div id="todos-list">
-        </div>
-        <!-- <div class="dayList" name="changeColor" id="dayTwo" onclick="changeColor(this)">Tuesday</div> -->
-        <div class="notification"></div>
-    </div>
+        <div class="notification"></div></div>
 
     <script src="main.js"></script>
   </body>
