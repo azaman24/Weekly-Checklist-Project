@@ -1,250 +1,324 @@
 :root {
-    --container-height: 800px;
-    --container-width: 800px;
-    --header-height: 150px;
-    --gray: #46566E;
-    --darkCyan: #1F2937;
-    --lightGray: #D3D3D3;
-    --white: #FFF;
-    --neonYellow: #FBEC5D;
-    --yellow: #FFF000;
-    --orange: #FF6A00;
-    --red: #FF0000;
-    --darkRed: #8B0000;
-    --green: #00E35A;
-    --darkGreen: #2E8930;
-  }
+  --containerHeight: 800px;
+  --containerWidth: 800px;
+  --headerHeight: 150px;
+  --gray: #46566E;
+  --darkCyan: #1F2937;
+  --lightGray: #D3D3D3;
+  --neonYellow: #FBEC5D;
+  --yellow: #FFF000;
+  --orange: #FF6A00;
+  --red: #FF0000;
+  --darkRed: #8B0000;
+  --green: #00E35A;
+  --darkGreen: #2E8930;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+html {
+  font-size: 20px;
+  background-color: var(--gray);
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background-color: var(--gray);
+  width: var(--containerWidth);
+  position: relative;
+  overflow: hidden;
+}
+
+#imgCentering {
+  width: 100%;
+}
+
+
+#imgTitle {
+  display: block;
+  position: center;
+  height: 60px;
+  margin-top: 2%;
+  margin-left: 20%;
+  margin-right: auto;
+}
+
+header {
+  width: 100%;
+  height: var(--headerHeight);
+  background-size: cover;
+  border-radius: 5px 5px 0 0;
+}
+.header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+}
+.newTask {
+  width: 100%;
+  height: 50px;
+  padding: 0.25rem 0;
+}
+.newTask form {
+  display: flex;
+  align-items: center;
+}
+.newTask form input {
+  flex: 1;
+  height: 50px;
+  background-color: var(--darkCyan);
+  border: none;
+  border-right: 0px;
+  border-radius: 0.75rem;
+  outline: transparent;
+  padding-left: 1rem;
+  font-size: 1rem;
+  color: #FFF;
+}
+.newTask form button {
+  width: 60px;
+  height: 40px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: var(--darkCyan);
+  border: none;
+  border-left: 0px;
+  padding: 1rem 1rem;
+  cursor: pointer;
+}
+
+#submitButton {
+  cursor: pointer;
+  margin: 0 1rem;
+  background-image: url(images/AddTaskDefault.png);
+  background-size: 40px;
+  width: 40px;
+  height: 40px;
+  transition: 0.3s;
+}
+
+#submitButton:hover {
+  background-image: url(images/AddTaskHovered.png);
+}
+
+#noDayChosen {
+  color: #FFF;
+  text-align: center;
+  margin-top: 15px;
+  border: 1px solid white;
+  border-radius: 1.125rem;
+}
+
+.dayList {
+  display: inline-block;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.4s;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: #FFF;
+  max-width: 800px;
+  width: 22.5%;
+  padding: 0.75rem;
+  border-radius: 1.125rem;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-right: auto;
+}
+
+.active {
+  background-color: var(--green);
+}
+
+.dayList:hover {
+  opacity: 0.65;
+}
+
+.dayList:active {
+  opacity: 0.55;
+}
+
+#tasksListMonday, 
+#tasksListTuesday, 
+#tasksListWednesday, 
+#tasksListThursday, 
+#tasksListFriday, 
+#tasksListSaturday, 
+#tasksListSunday {
+  background-color: var(--gray);
+  padding: 0.5rem;
+  border: var(--gray);
+  color: #FFF;
+  border-radius: 0 0 10px 10px;
+}
+#tasksListMonday .task, 
+#tasksListTuesday .task,
+#tasksListWednesday .task,
+#tasksListThursday .task,
+#tasksListFriday .task,
+#tasksListSaturday .task,
+#tasksListSunday .task {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem;
+  border-radius: 15px;
+}
+#tasksListMonday .task:hover, 
+#tasksListTuesday .task:hover,
+#tasksListWednesday .task:hover,
+#tasksListThursday .task:hover,
+#tasksListFriday .task:hover,
+#tasksListSaturday .task:hover,
+#tasksListSunday .task:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#tasksListMonday .task *, 
+#tasksListTuesday .task *,
+#tasksListWednesday .task *,
+#tasksListThursday .task *,
+#tasksListFriday .task *,
+#tasksListSaturday .task *,
+#tasksListSunday .task * {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+#tasksListMonday .task i,
+#tasksListTuesday .task i,
+#tasksListWednesday .task i,
+#tasksListThursday .task i,
+#tasksListFriday .task i,
+#tasksListSaturday .task i,
+#tasksListSunday .task i {
+  font-size: 0.9rem;
+}
+#tasksListMonday .task p, 
+#tasksListTuesday .task p, 
+#tasksListWednesday .task p, 
+#tasksListThursday .task p, 
+#tasksListFriday .task p, 
+#tasksListSaturday .task p, 
+#tasksListSunday .task p {
+  flex: 1;
+  word-break: break-all;
+}  
+
+.checked {
+  text-decoration: line-through;
+  color: var(--darkCyan);
+}
+
+#tasksListMonday .task .uncheckedTask, 
+#tasksListTuesday .task .uncheckedTask,
+#tasksListWednesday .task .uncheckedTask,
+#tasksListThursday .task .uncheckedTask,
+#tasksListFriday .task .uncheckedTask,
+#tasksListSaturday .task .uncheckedTask,
+#tasksListSunday .task .uncheckedTask {
+  font-size: 20px;
+}
+#tasksListMonday .task .uncheckedButton,
+#tasksListTuesday .task .uncheckedButton,
+#tasksListWednesday .task .uncheckedButton,
+#tasksListThursday .task .uncheckedButton,
+#tasksListFriday .task .uncheckedButton,
+#tasksListSaturday .task .uncheckedButton,
+#tasksListSunday .task .uncheckedButton {
+  cursor: pointer;
+  margin: 0 1rem;
+  background-image: url(images/Unchecked.png);
+  background-size: 32.5px;
+  width: 32.5px;
+  height: 32.5px;
+  transition: 0.3s;
+}
+#tasksListMonday .task .uncheckedButton:hover,
+#tasksListTuesday .task .uncheckedButton:hover,
+#tasksListWednesday .task .uncheckedButton:hover,
+#tasksListThursday .task .uncheckedButton:hover,
+#tasksListFriday .task .uncheckedButton:hover,
+#tasksListSaturday .task .uncheckedButton:hover,
+#tasksListSunday .task .uncheckedButton:hover {
+  background-image: url(images/UncheckedHover.png);
+}
+#tasksListMonday .task .checkedButton,
+#tasksListTuesday .task .checkedButton,
+#tasksListWednesday .task .checkedButton,
+#tasksListThursday .task .checkedButton,
+#tasksListFriday .task .checkedButton,
+#tasksListSaturday .task .checkedButton,
+#tasksListSunday .task .checkedButton {
+  cursor: pointer;
+  margin: 0 1rem;
+  background-image: url(images/Checked.png);
+  background-size: 32.5px;
+  width: 32.5px;
+  height: 32.5px;
+  transition: 0.3s;
+}
+#tasksListMonday .task .deleteButton,
+#tasksListTuesday .task .deleteButton,
+#tasksListWednesday .task .deleteButton,
+#tasksListThursday .task .deleteButton,
+#tasksListFriday .task .deleteButton,
+#tasksListSaturday .task .deleteButton,
+#tasksListSunday .task .deleteButton {
+  cursor: pointer;
+  margin: 0 1rem;
+  background-image: url(images/Delete.png);
+  background-size: 32.5px;
+  width: 32.5px;
+  height: 32.5px;
+  transition: 0.3s;
+}
+#tasksListMonday .task .deleteButton:hover,
+#tasksListTuesday .task .deleteButton:hover,
+#tasksListWednesday .task .deleteButton:hover,
+#tasksListThursday .task .deleteButton:hover,
+#tasksListFriday .task .deleteButton:hover,
+#tasksListSaturday .task .deleteButton:hover,
+#tasksListSunday .task .deleteButton:hover {
+  background-image: url(images/DeleteHover.png);
+}
   
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Trebuchet MS', sans-serif;
-  }
-  
-  html {
-    font-size: 20px;
-    background-color: var(--gray);
-  }
-  
-  body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .container {
-    background-color: var(--gray);
-    width: var(--container-width);
-    height: var(--container-height);
-  
-    position: relative;
-    overflow: hidden;
-  }
-  
-  #doc-title {
-      position: center;
-      width: 100%;
-      color: var(--light);
-      text-align: center;
-  }
-  
-  header {
-    width: 100%;
-    height: var(--header-height);
-    /* background-image: url('./img/bg.jpg'); */
-    background-size: cover;
-    border-radius: 5px 5px 0 0;
-  }
-  .header {
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
-  .new-todo {
-    width: 100%;
-    height: 50px;
-    padding: 0.25rem 0;
-  }
-  .new-todo form {
-    display: flex;
-    align-items: center;
-  }
-  .new-todo form input {
-    flex: 1;
-    height: 50px;
-    background-color: var(--darkCyan);
-    border: none;
-    border-right: 0px;
-    border-radius: 0.75rem;
-    outline: transparent;
-    padding-left: 1rem;
-    font-size: 1rem;
-    color: #fff;
-  }
-  .new-todo form button {
-    width: 60px;
-    height: 40px;
-    font-size: 1rem;
-    background-color: transparent;
-    color: var(--darkCyan);
-    border: none;
-    border-left: 0px;
-    padding: 1rem 1rem;
-    cursor: pointer;
-  }
-  
-  #submitButton {
-      cursor: pointer;
-      margin: 0 1rem;
-      background-image: url(images/AddTaskDefault.png);
-      background-size: 40px;
-      width: 40px;
-      height: 40px;
-      transition: 0.3s;
-  }
-  
-  #submitButton:hover {
-      background-image: url(images/AddTaskHovered.png);
-  }
-  
-  .dayList {
-    display: inline-block;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: 0.4s;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 1.25rem;
-    font-weight: bold;
-    background-color: var(--white);
-    max-width: 800px;
-    width: 22.5%;
-    padding: 0.75rem;
-    border-radius: 1.125rem;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    margin-right: auto;
-  }
-  
-  .active {
-    background-color: var(--green);
-  }
-  
-  .dayList:hover {
-    opacity: 0.65;
-  }
-  
-  .dayList:active {
-    opacity: 0.55;
-  }
-  
-  #todos-list {
-    height: calc(var(--container-height) - var(--header-height));
-    background-color: var(--gray);
-    padding: 0.5rem;
-    border: var(--gray);
-    color: var(--white);
-    border-radius: 0 0 10px 10px;
-  }
-  
-  #todos-list .todo {
-    display: flex;
-    align-items: center;
-    
-    padding: 1rem 1rem;
-    border-radius: 15px;
-  }
-  #todos-list .todo:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  #todos-list .todo * {
-    cursor: pointer;
-    margin-right: 0.5rem;
-  }
-  #todos-list .todo i {
-    font-size: 0.9rem;
-  }
-  #todos-list .todo p {
-    flex: 1;
-    word-break: break-all;
-  }
-  
-  
-  .checked {
-    text-decoration: line-through;
-    color: var(--darkCyan);
-  }
-  
-  #todos-list .todo .uncheckedTask {
-    font-size: 20px;
-  }
-  
-  #todos-list .todo .uncheckedButton {
-      cursor: pointer;
-      margin: 0 1rem;
-      background-image: url(images/Unchecked.png);
-      background-size: 32.5px;
-      width: 32.5px;
-      height: 32.5px;
-      transition: 0.3s;
-  }
-  
-  #todos-list .todo .deleteButton {
-      cursor: pointer;
-      margin: 0 1rem;
-      background-image: url(images/Delete.png);
-      background-size: 32.5px;
-      width: 32.5px;
-      height: 32.5px;
-      transition: 0.3s;
-  }
-  
-  #todos-list .todo .uncheckedButton:hover {
-      background-image: url(images/UncheckedHover.png);
-  }
-  
-  #todos-list .todo .deleteButton:hover {
-      background-image: url(images/DeleteHover.png);
-  }
-  
-  #todos-list .todo .checkedButton {
-      cursor: pointer;
-      margin: 0 1rem;
-      background-image: url(images/Checked.png);
-      background-size: 32.5px;
-      width: 32.5px;
-      height: 32.5px;
-      transition: 0.3s;
-  }
-  
-  .notification {
-    position: absolute;
-  
-    width: calc(3 * var(--container-width) / 4);
-    height: 60px;
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-    opacity: 0.9;
-  
-    border-radius: 8px;
-    background-color: var(--red);
-    top: 10px;
-    right: calc(-3 * var(--container-width) / 4);
-  
-    color: #fff;
-  
-    transition: 300ms right ease-in-out;
-  }
-  
-  .notif-enter {
-    right: 10px;
-  }
+.notification {
+  position: absolute;
+
+  width: calc(3 * var(--containerWidth) / 4);
+  height: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0.9;
+
+  border-radius: 8px;
+  background-color: var(--red);
+  top: 10px;
+  right: calc(-3 * var(--containerWidth) / 4);
+
+  color: #FFF;
+
+  transition: 300ms right ease-in-out;
+}
+
+.notif-enter {
+  right: 10px;
+}
