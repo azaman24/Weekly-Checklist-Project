@@ -2,18 +2,74 @@ window.addEventListener('load', ()=> {
   const form = document.getElementById('taskForm');
   const taskInput = document.getElementById('newTask');
   const tasksList = document.getElementById('tasksList');
-  const tasksListMonday = document.getElementById('tasksListMonday');
-  const tasksListTuesday = document.getElementById('tasksListTuesday');
-  const tasksListWednesday = document.getElementById('tasksListWednesday');
-  const tasksListThursday = document.getElementById('tasksListThursday');
-  const tasksListFriday = document.getElementById('tasksListFriday');
-  const tasksListSaturday = document.getElementById('tasksListSaturday');
-  const tasksListSunday = document.getElementById('tasksListSunday');
+  const tasksLists = [
+    tasksListMonday = document.getElementById('tasksListMonday'),
+    tasksListTuesday = document.getElementById('tasksListTuesday'),
+    tasksListWednesday = document.getElementById('tasksListWednesday'),
+    tasksListThursday = document.getElementById('tasksListThursday'),
+    tasksListFriday = document.getElementById('tasksListFriday'),
+    tasksListSaturday = document.getElementById('tasksListSaturday'),
+    tasksListSunday = document.getElementById('tasksListSunday')
+  ]
 
   const notification = document.querySelector('.notification');
   const dayBtns = document.querySelectorAll(".dayList");
   let daySelected = null;
-  const daysArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  let dayNumber = null;
+  const daysArray = [
+    'Monday', 
+    'Tuesday', 
+    'Wednesday', 
+    'Thursday', 
+    'Friday', 
+    'Saturday', 
+    'Sunday'
+  ];
+
+  let tasksStorage = [
+    'tasksMonday', 
+    'tasksTuesday', 
+    'tasksWednesday', 
+    'tasksThursday', 
+    'tasksFriday', 
+    'tasksSaturday', 
+    'tasksSunday'
+  ];
+
+  // tasksAllDays contains all the data the user has put in each day
+  let tasksAllDays = [
+    tasksMonday = JSON.parse(localStorage.getItem('tasksMonday')) || [],
+    tasksTuesday = JSON.parse(localStorage.getItem('tasksTuesday')) || [],
+    tasksWednesday = JSON.parse(localStorage.getItem('tasksWednesday')) || [],
+    tasksThursday = JSON.parse(localStorage.getItem('tasksThursday')) || [],
+    tasksFriday = JSON.parse(localStorage.getItem('tasksFriday')) || [],
+    tasksSaturday = JSON.parse(localStorage.getItem('tasksSaturday')) || [],
+    tasksSunday = JSON.parse(localStorage.getItem('tasksSunday')) || [],
+  ]
+
+  // dayBtns.forEach(button => {
+  //   button.addEventListener('click', function() {
+  //     dayBtns.forEach(btn => btn.classList.remove('active'));
+  //     this.classList.add('active');
+  //     daySelected = this.textContent;
+  //     renderTasks();
+
+  //     const taskLists = {
+  //       'Monday': tasksListMonday,
+  //       'Tuesday': tasksListTuesday,
+  //       'Wednesday': tasksListWednesday,
+  //       'Thursday': tasksListThursday,
+  //       'Friday': tasksListFriday,
+  //       'Saturday': tasksListSaturday,
+  //       'Sunday': tasksListSunday
+  //     };
+  //     for (const [day, taskList] of Object.entries(taskLists)) {
+  //       if (day !== daySelected) {
+  //         taskList.innerHTML = '';
+  //       }
+  //     }
+  //   })
+  // })
 
   dayBtns.forEach(button => {
     button.addEventListener('click', function() {
@@ -22,6 +78,10 @@ window.addEventListener('load', ()=> {
       daySelected = this.textContent;
       renderTasks();
       if (daySelected === 'Monday') {
+        dayNumber = 0;
+        // for (daysArray[dayNumber] in daysArray) {
+        //   tasksList[dayNumber].innerHTML != '';
+        // }
         tasksListTuesday.innerHTML = '';
         tasksListWednesday.innerHTML = '';
         tasksListThursday.innerHTML = '';
@@ -30,6 +90,7 @@ window.addEventListener('load', ()=> {
         tasksListSunday.innerHTML = '';
 
       } else if (daySelected === 'Tuesday') {
+        dayNumber = 1;
         tasksListMonday.innerHTML = '';
         tasksListWednesday.innerHTML = '';
         tasksListThursday.innerHTML = '';
@@ -38,6 +99,7 @@ window.addEventListener('load', ()=> {
         tasksListSunday.innerHTML = '';
 
       } else if (daySelected === 'Wednesday') {
+        dayNumber = 2;
         tasksListMonday.innerHTML = '';
         tasksListTuesday.innerHTML = '';
         tasksListThursday.innerHTML = '';
@@ -46,6 +108,7 @@ window.addEventListener('load', ()=> {
         tasksListSunday.innerHTML = '';
 
       } else if (daySelected === 'Thursday') {
+        dayNumber = 3;
         tasksListMonday.innerHTML = '';
         tasksListTuesday.innerHTML = '';
         tasksListWednesday.innerHTML = '';
@@ -54,6 +117,7 @@ window.addEventListener('load', ()=> {
         tasksListSunday.innerHTML = '';
 
       } else if (daySelected === 'Friday') {
+        dayNumber = 4;
         tasksListMonday.innerHTML = '';
         tasksListTuesday.innerHTML = '';
         tasksListWednesday.innerHTML = '';
@@ -62,6 +126,7 @@ window.addEventListener('load', ()=> {
         tasksListSunday.innerHTML = '';
         
       } else if (daySelected === 'Saturday') {
+        dayNumber = 5;
         tasksListMonday.innerHTML = '';
         tasksListTuesday.innerHTML = '';
         tasksListWednesday.innerHTML = '';
@@ -70,6 +135,7 @@ window.addEventListener('load', ()=> {
         tasksListSunday.innerHTML = '';
 
       } else if (daySelected === 'Sunday') {
+        dayNumber = 6;
         tasksListMonday.innerHTML = '';
         tasksListTuesday.innerHTML = '';
         tasksListWednesday.innerHTML = '';
@@ -80,16 +146,6 @@ window.addEventListener('load', ()=> {
       }
     })
   })
-  
-  // each task is the data that the user puts into the checklist of the selected day
-  let tasksMonday = JSON.parse(localStorage.getItem('tasksMonday')) || [];
-  let tasksTuesday = JSON.parse(localStorage.getItem('tasksTuesday')) || [];
-  let tasksWednesday = JSON.parse(localStorage.getItem('tasksWednesday')) || [];
-  let tasksThursday = JSON.parse(localStorage.getItem('tasksThursday')) || [];
-  let tasksFriday = JSON.parse(localStorage.getItem('tasksFriday')) || [];
-  let tasksSaturday = JSON.parse(localStorage.getItem('tasksSaturday')) || [];
-  let tasksSunday = JSON.parse(localStorage.getItem('tasksSunday')) || [];
-
       
   form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -101,20 +157,8 @@ window.addEventListener('load', ()=> {
     saveTask();
     renderTasks();
 
-    if (daySelected === 'Monday') {
-      localStorage.setItem('tasksMonday', JSON.stringify(tasksMonday));
-    } else if (daySelected === 'Tuesday') {
-      localStorage.setItem('tasksTuesday', JSON.stringify(tasksTuesday));
-    } else if (daySelected === 'Wednesday') {
-      localStorage.setItem('tasksWednesday', JSON.stringify(tasksWednesday));
-    } else if (daySelected === 'Thursday') {
-      localStorage.setItem('tasksThursday', JSON.stringify(tasksThursday));
-    } else if (daySelected === 'Friday') {
-      localStorage.setItem('tasksFriday', JSON.stringify(tasksFriday));
-    } else if (daySelected === 'Saturday') {
-      localStorage.setItem('tasksSaturday', JSON.stringify(tasksSaturday));
-    } else if (daySelected === 'Sunday') {
-      localStorage.setItem('tasksSunday', JSON.stringify(tasksSunday));
+    if(daySelected === daysArray[dayNumber]) {
+      localStorage.setItem(tasksStorage[dayNumber], JSON.stringify(tasksAllDays[dayNumber]));
     }
   });
       
@@ -125,249 +169,67 @@ window.addEventListener('load', ()=> {
     // check if the task list is empty
     const emptyTask = taskValue === '';
       
-    // check for duplicate tasks in the same list  
-    if (daySelected === 'Monday') {
-        const presentTask = tasksMonday.some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
+    // check for duplicate tasks in the same list
+    if (daySelected === daysArray[dayNumber]) {
+      const presentTask = tasksAllDays[dayNumber].some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
         if (emptyTask) {
           showNotification("Task input is empty");
         } else if (presentTask) {
           showNotification('Task already exists!');
         } else {
-          tasksMonday.push({
+          tasksAllDays[dayNumber].push({
             value: taskValue,
             checked: false,
             color: '#' + Math.floor(Math.random() * 16777215).toString(16),
           });
       
           taskInput.value = '';
-        }; 
-
-    } else if (daySelected === 'Tuesday') {
-      const presentTask = tasksTuesday.some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
-      if (emptyTask) {
-        showNotification("Task input is empty");
-      } else if (presentTask) {
-        showNotification('Task already exists!');
-      } else {
-        tasksTuesday.push({
-          value: taskValue,
-          checked: false,
-          color: '#' + Math.floor(Math.random() * 16777215).toString(16),
-        });
-    
-        taskInput.value = '';
-      }; 
-
-    } else if (daySelected === 'Wednesday') {
-      const presentTask = tasksWednesday.some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
-      if (emptyTask) {
-        showNotification("Task input is empty");
-      } else if (presentTask) {
-        showNotification('Task already exists!');
-      } else {
-        tasksWednesday.push({
-          value: taskValue,
-          checked: false,
-          color: '#' + Math.floor(Math.random() * 16777215).toString(16),
-        });
-    
-        taskInput.value = '';
-      }; 
-
-    } else if (daySelected === 'Thursday') {
-      const presentTask = tasksThursday.some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
-      if (emptyTask) {
-        showNotification("Task input is empty");
-      } else if (presentTask) {
-        showNotification('Task already exists!');
-      } else {
-        tasksThursday.push({
-          value: taskValue,
-          checked: false,
-          color: '#' + Math.floor(Math.random() * 16777215).toString(16),
-        });
-    
-        taskInput.value = '';
-      }; 
-
-    } else if (daySelected === 'Friday') {
-      const presentTask = tasksFriday.some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
-      if (emptyTask) {
-        showNotification("Task input is empty");
-      } else if (presentTask) {
-        showNotification('Task already exists!');
-      } else {
-        tasksFriday.push({
-          value: taskValue,
-          checked: false,
-          color: '#' + Math.floor(Math.random() * 16777215).toString(16),
-        });
-    
-        taskInput.value = '';
-      }; 
-
-    } else if (daySelected === 'Saturday') {
-      const presentTask = tasksSaturday.some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
-      if (emptyTask) {
-        showNotification("Task input is empty");
-      } else if (presentTask) {
-        showNotification('Task already exists!');
-      } else {
-        tasksSaturday.push({
-          value: taskValue,
-          checked: false,
-          color: '#' + Math.floor(Math.random() * 16777215).toString(16),
-        });
-    
-        taskInput.value = '';
-      }; 
-
-    } else if (daySelected === 'Sunday') {
-      const presentTask = tasksSunday.some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
-      if (emptyTask) {
-        showNotification("Task input is empty");
-      } else if (presentTask) {
-        showNotification('Task already exists!');
-      } else {
-        tasksSunday.push({
-          value: taskValue,
-          checked: false,
-          color: '#' + Math.floor(Math.random() * 16777215).toString(16),
-        });
-    
-        taskInput.value = '';
-      }; 
-    }
+        };
+      }    
   };
       
-  // updates the list of saved tasks
   function renderTasks() {
-    if (daySelected === 'Monday') {  
-        if (tasksMonday.length === 0) {
-          tasksListMonday.innerHTML = '<center>No tasks on Monday!</center>';
-          return;
-        }
-      
-      // clears the list before performing a re-render
-      tasksListMonday.innerHTML = '';
-    
-      // the structure of each task
-        tasksMonday.forEach((task, index) => {
-          tasksListMonday.innerHTML += `
-            <div class="task" id=${index}>
-            <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-            <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-            <i class="deleteButton" data-action="delete"></i>
-            </div>
-          `;
-        });
-        
-    } else if (daySelected === 'Tuesday') {  
-      if (tasksTuesday.length === 0) {
-        tasksListTuesday.innerHTML = '<center>No tasks on Tuesday!</center>';
-        return;
-      }
-    
-      tasksListTuesday.innerHTML = '';
-  
-      tasksTuesday.forEach((task, index) => {
-        tasksListTuesday.innerHTML += `
-          <div class="task" id=${index}>
-          <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-          <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-          <i class="deleteButton" data-action="delete"></i>
-          </div>
-        `;
-      });
+    const taskArrays = {
+      'Monday': tasksMonday,
+      'Tuesday': tasksTuesday,
+      'Wednesday': tasksWednesday,
+      'Thursday': tasksThursday,
+      'Friday': tasksFriday,
+      'Saturday': tasksSaturday,
+      'Sunday': tasksSunday
+    };
 
-    } else if (daySelected === 'Wednesday') {  
-      if (tasksWednesday.length === 0) {
-        tasksListWednesday.innerHTML = '<center>No tasks on Wednesday!</center>';
+    const taskListElements = {
+      'Monday': tasksListMonday,
+      'Tuesday': tasksListTuesday,
+      'Wednesday': tasksListWednesday,
+      'Thursday': tasksListThursday,
+      'Friday': tasksListFriday,
+      'Saturday': tasksListSaturday,
+      'Sunday': tasksListSunday
+    };
+
+    const tasks = taskArrays[daySelected];
+    const taskList = taskListElements[daySelected];
+
+    if (tasks.length === 0) {
+        taskList.innerHTML = `<center>No tasks on ${daySelected}!</center>`;
         return;
-      }
-    
-      tasksListWednesday.innerHTML = '';
-  
-      tasksWednesday.forEach((task, index) => {
-        tasksListWednesday.innerHTML += `
-          <div class="task" id=${index}>
-          <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-          <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-          <i class="deleteButton" data-action="delete"></i>
-          </div>
-        `;
-      });
-    } else if (daySelected === 'Thursday') {  
-      if (tasksThursday.length === 0) {
-        tasksListThursday.innerHTML = '<center>No tasks on Thursday!</center>';
-        return;
-      }
-    
-      tasksListThursday.innerHTML = '';
-  
-      tasksThursday.forEach((task, index) => {
-        tasksListThursday.innerHTML += `
-          <div class="task" id=${index}>
-          <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-          <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-          <i class="deleteButton" data-action="delete"></i>
-          </div>
-        `;
-      });
-    } else if (daySelected === 'Friday') {  
-      if (tasksFriday.length === 0) {
-        tasksListFriday.innerHTML = '<center>No tasks on Friday!</center>';
-        return;
-      }
-    
-      tasksListFriday.innerHTML = '';
-  
-      tasksFriday.forEach((task, index) => {
-        tasksListFriday.innerHTML += `
-          <div class="task" id=${index}>
-          <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-          <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-          <i class="deleteButton" data-action="delete"></i>
-          </div>
-        `;
-      });
-    } else if (daySelected === 'Saturday') {  
-      if (tasksSaturday.length === 0) {
-        tasksListSaturday.innerHTML = '<center>No tasks on Saturday!</center>';
-        return;
-      }
-    
-      tasksListSaturday.innerHTML = '';
-  
-      tasksSaturday.forEach((task, index) => {
-        tasksListSaturday.innerHTML += `
-          <div class="task" id=${index}>
-          <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-          <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-          <i class="deleteButton" data-action="delete"></i>
-          </div>
-        `;
-      });
-    } else if (daySelected === 'Sunday') {  
-      if (tasksSunday.length === 0) {
-        tasksListSunday.innerHTML = '<center>No tasks on Sunday!</center>';
-        return;
-      }
-    
-      tasksListSunday.innerHTML = '';
-  
-      tasksSunday.forEach((task, index) => {
-        tasksListSunday.innerHTML += `
-          <div class="task" id=${index}>
-          <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-          <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-          <i class="deleteButton" data-action="delete"></i>
-          </div>
-        `;
-      });
     }
+
+    taskList.innerHTML = '';
+
+    tasks.forEach((task, index) => {
+        taskList.innerHTML += `
+            <div class="task" id=${index}>
+                <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
+                <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
+                <i class="deleteButton" data-action="delete"></i>
+            </div>
+        `;
+    });
   }
-  
+
   tasksListMonday.addEventListener('click', (event) => {
     tasksListClicked();
   });
@@ -415,102 +277,51 @@ window.addEventListener('load', ()=> {
       
   // checks off a task
   function checkTask(taskId) {
-    if (daySelected === 'Monday') {
-      tasksMonday = tasksMonday.map((task, index) => ({
-        ...task,
-        checked: index === taskId ? !task.checked : task.checked,
-      }));
-      renderTasks();
-      localStorage.setItem('tasksMonday', JSON.stringify(tasksMonday));
+    const taskArrays = {
+      'Monday': 'tasksMonday',
+      'Tuesday': 'tasksTuesday',
+      'Wednesday': 'tasksWednesday',
+      'Thursday': 'tasksThursday',
+      'Friday': 'tasksFriday',
+      'Saturday': 'tasksSaturday',
+      'Sunday': 'tasksSunday'
+    };
 
-    } else if (daySelected === 'Tuesday') {
-      tasksTuesday = tasksTuesday.map((task, index) => ({
-        ...task,
-        checked: index === taskId ? !task.checked : task.checked,
-      }));
-      renderTasks();
-      localStorage.setItem('tasksTuesday', JSON.stringify(tasksTuesday));
+    // Get the array name for the selected day
+    const arrayName = taskArrays[daySelected];
 
-    } else if (daySelected === 'Wednesday') {
-      tasksWednesday = tasksWednesday.map((task, index) => ({
+    // Check if the selected day is valid
+    if (arrayName && window[arrayName]) {
+      window[arrayName] = window[arrayName].map((task, index) => ({
         ...task,
         checked: index === taskId ? !task.checked : task.checked,
       }));
-      renderTasks();
-      localStorage.setItem('tasksWednesday', JSON.stringify(tasksWednesday));
 
-    } else if (daySelected === 'Thursday') {
-      tasksThursday = tasksThursday.map((task, index) => ({
-        ...task,
-        checked: index === taskId ? !task.checked : task.checked,
-      }));
+      // Re-render tasks and update local storage
       renderTasks();
-      localStorage.setItem('tasksThursday', JSON.stringify(tasksThursday));
-
-    } else if (daySelected === 'Friday') {
-      tasksFriday = tasksFriday.map((task, index) => ({
-        ...task,
-        checked: index === taskId ? !task.checked : task.checked,
-      }));
-      renderTasks();
-      localStorage.setItem('tasksFriday', JSON.stringify(tasksFriday));
-      
-    } else if (daySelected === 'Saturday') {
-      tasksSaturday = tasksSaturday.map((task, index) => ({
-        ...task,
-        checked: index === taskId ? !task.checked : task.checked,
-      }));
-      renderTasks();
-      localStorage.setItem('tasksSaturday', JSON.stringify(tasksSaturday));
-      
-    } else if (daySelected === 'Sunday') {
-      tasksSunday = tasksSunday.map((task, index) => ({
-        ...task,
-        checked: index === taskId ? !task.checked : task.checked,
-      }));
-      renderTasks();
-      localStorage.setItem('tasksSunday', JSON.stringify(tasksSunday));
-      
-    }
+      localStorage.setItem(arrayName, JSON.stringify(window[arrayName]));      
+    }    
   }
 
-  // deletes a task
+  // deletes a task from localstorage
   function deleteTask(taskId) {
-    if (daySelected === 'Monday') {
-      tasksMonday = tasksMonday.filter((task, index) => index !== taskId);
-      renderTasks();
-      localStorage.setItem('tasksMonday', JSON.stringify(tasksMonday));
+    const taskArrays = {
+      'Monday': 'tasksMonday',
+      'Tuesday': 'tasksTuesday',
+      'Wednesday': 'tasksWednesday',
+      'Thursday': 'tasksThursday',
+      'Friday': 'tasksFriday',
+      'Saturday': 'tasksSaturday',
+      'Sunday': 'tasksSunday'
+    };
 
-    } else if (daySelected === 'Tuesday') {
-      tasksTuesday = tasksTuesday.filter((task, index) => index !== taskId);
-      renderTasks();
-      localStorage.setItem('tasksTuesday', JSON.stringify(tasksTuesday));
+    const arrayName = taskArrays[daySelected];
 
-    } else if (daySelected === 'Wednesday') {
-      tasksWednesday = tasksWednesday.filter((task, index) => index !== taskId);
-      renderTasks();
-      localStorage.setItem('tasksWednesday', JSON.stringify(tasksWednesday));
+    if (arrayName && window[arrayName]) {
+        window[arrayName] = window[arrayName].filter((task, index) => index !== taskId);
 
-    } else if (daySelected === 'Thursday') {
-      tasksThursday = tasksThursday.filter((task, index) => index !== taskId);
-      renderTasks();
-      localStorage.setItem('tasksThursday', JSON.stringify(tasksThursday));
-
-    } else if (daySelected === 'Friday') {
-      tasksFriday = tasksFriday.filter((task, index) => index !== taskId);
-      renderTasks();
-      localStorage.setItem('tasksFriday', JSON.stringify(tasksFriday));
-
-    } else if (daySelected === 'Saturday') {
-      tasksSaturday = tasksSaturday.filter((task, index) => index !== taskId);
-      renderTasks();
-      localStorage.setItem('tasksSaturday', JSON.stringify(tasksSaturday));
-
-    } else if (daySelected === 'Sunday') {
-      tasksSunday = tasksSunday.filter((task, index) => index !== taskId);
-      renderTasks();
-      localStorage.setItem('tasksSunday', JSON.stringify(tasksSunday));
-
+        renderTasks();
+        localStorage.setItem(arrayName, JSON.stringify(window[arrayName]));
     }
   }
 
