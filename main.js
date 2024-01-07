@@ -1,7 +1,6 @@
 window.addEventListener('load', ()=> {
   const form = document.getElementById('taskForm');
   const taskInput = document.getElementById('newTask');
-  const tasksList = document.getElementById('tasksList');
   const tasksLists = [
     tasksListMonday = document.getElementById('tasksListMonday'),
     tasksListTuesday = document.getElementById('tasksListTuesday'),
