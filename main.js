@@ -66,7 +66,7 @@ window.addEventListener('load', ()=> {
   
       // determines the dayNumber based on the index of the button
       dayNumber = index;
-  
+      
       // clears the innerHTML of all tasksList elements except the selected one
       tasksList.forEach((taskList, i) => {
         if (i !== dayNumber) {
