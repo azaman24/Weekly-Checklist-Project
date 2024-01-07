@@ -46,6 +46,7 @@ window.addEventListener('load', ()=> {
     tasksSaturday = JSON.parse(localStorage.getItem('tasksSaturday')) || [],
     tasksSunday = JSON.parse(localStorage.getItem('tasksSunday')) || [],
   ]
+  let fruits = ['apple', 'banana', 'grape', 'strawberry'];
 
   dayBtns.forEach(button => {
     button.addEventListener('click', function() {
@@ -53,35 +54,22 @@ window.addEventListener('load', ()=> {
       this.classList.add('active');
       daySelected = this.textContent;
       renderTasks();
-      if (daySelected === 'Monday') {
-        dayNumber = 0;
-        tasksList[!0].innerHTML = '';
 
-      } else if (daySelected === 'Tuesday') {
-        dayNumber = 1;
-        tasksList[!1].innerHTML = '';
-
-      } else if (daySelected === 'Wednesday') {
-        dayNumber = 2;
-        tasksList[!2].innerHTML = '';
-
-      } else if (daySelected === 'Thursday') {
-        dayNumber = 3;
-        tasksList[!3].innerHTML = '';
-
-      } else if (daySelected === 'Friday') {
-        dayNumber = 4;
-        tasksList[!4].innerHTML = '';
-        
-      } else if (daySelected === 'Saturday') {
-        dayNumber = 5;
-        tasksList[!5].innerHTML = '';
-
-      } else if (daySelected === 'Sunday') {
-        dayNumber = 6;
-        tasksList[!6].innerHTML = '';
-
+      const taskLists = {
+        'Monday': tasksListMonday,
+        'Tuesday': tasksListTuesday,
+        'Wednesday': tasksListWednesday,
+        'Thursday': tasksListThursday,
+        'Friday': tasksListFriday,
+        'Saturday': tasksListSaturday,
+        'Sunday': tasksListSunday
+      };
+      for (const [day, taskList] of Object.entries(taskLists)) {
+        if (day !== daySelected) {
+          taskList.innerHTML = '';
+        }
       }
+      dayNumber = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     })
   })      
 
@@ -93,7 +81,7 @@ window.addEventListener('load', ()=> {
 
     saveTask();
     renderTasks();
-
+    
     if(daySelected === daysArray[dayNumber]) {
       localStorage.setItem(tasksStorage[dayNumber], JSON.stringify(tasksAllDays[dayNumber]));
     }
