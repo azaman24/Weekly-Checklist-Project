@@ -116,7 +116,6 @@ window.addEventListener('load', ()=> {
       }    
   };
 
-
   function renderTasks() {
     const taskArrays = {
       'Monday': tasksMonday,
