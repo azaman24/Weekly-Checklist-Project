@@ -14,6 +14,7 @@ window.addEventListener('load', ()=> {
 
   const notification = document.querySelector('.notification');
   const dayBtns = document.querySelectorAll(".dayList");
+  
   let daySelected = null;
   let dayNumber = null;
   const daysArray = [
@@ -47,30 +48,6 @@ window.addEventListener('load', ()=> {
     tasksSunday = JSON.parse(localStorage.getItem('tasksSunday')) || [],
   ]
 
-  // dayBtns.forEach(button => {
-  //   button.addEventListener('click', function() {
-  //     dayBtns.forEach(btn => btn.classList.remove('active'));
-  //     this.classList.add('active');
-  //     daySelected = this.textContent;
-  //     renderTasks();
-
-  //     const taskLists = {
-  //       'Monday': tasksListMonday,
-  //       'Tuesday': tasksListTuesday,
-  //       'Wednesday': tasksListWednesday,
-  //       'Thursday': tasksListThursday,
-  //       'Friday': tasksListFriday,
-  //       'Saturday': tasksListSaturday,
-  //       'Sunday': tasksListSunday
-  //     };
-  //     for (const [day, taskList] of Object.entries(taskLists)) {
-  //       if (day !== daySelected) {
-  //         taskList.innerHTML = '';
-  //       }
-  //     }
-  //   })
-  // })
-
   dayBtns.forEach(button => {
     button.addEventListener('click', function() {
       dayBtns.forEach(btn => btn.classList.remove('active'));
@@ -79,77 +56,38 @@ window.addEventListener('load', ()=> {
       renderTasks();
       if (daySelected === 'Monday') {
         dayNumber = 0;
-        // for (daysArray[dayNumber] in daysArray) {
-        //   tasksList[dayNumber].innerHTML != '';
-        // }
-        tasksListTuesday.innerHTML = '';
-        tasksListWednesday.innerHTML = '';
-        tasksListThursday.innerHTML = '';
-        tasksListFriday.innerHTML = '';
-        tasksListSaturday.innerHTML = '';
-        tasksListSunday.innerHTML = '';
+        tasksList[!0].innerHTML = '';
 
       } else if (daySelected === 'Tuesday') {
         dayNumber = 1;
-        tasksListMonday.innerHTML = '';
-        tasksListWednesday.innerHTML = '';
-        tasksListThursday.innerHTML = '';
-        tasksListFriday.innerHTML = '';
-        tasksListSaturday.innerHTML = '';
-        tasksListSunday.innerHTML = '';
+        tasksList[!1].innerHTML = '';
 
       } else if (daySelected === 'Wednesday') {
         dayNumber = 2;
-        tasksListMonday.innerHTML = '';
-        tasksListTuesday.innerHTML = '';
-        tasksListThursday.innerHTML = '';
-        tasksListFriday.innerHTML = '';
-        tasksListSaturday.innerHTML = '';
-        tasksListSunday.innerHTML = '';
+        tasksList[!2].innerHTML = '';
 
       } else if (daySelected === 'Thursday') {
         dayNumber = 3;
-        tasksListMonday.innerHTML = '';
-        tasksListTuesday.innerHTML = '';
-        tasksListWednesday.innerHTML = '';
-        tasksListFriday.innerHTML = '';
-        tasksListSaturday.innerHTML = '';
-        tasksListSunday.innerHTML = '';
+        tasksList[!3].innerHTML = '';
 
       } else if (daySelected === 'Friday') {
         dayNumber = 4;
-        tasksListMonday.innerHTML = '';
-        tasksListTuesday.innerHTML = '';
-        tasksListWednesday.innerHTML = '';
-        tasksListThursday.innerHTML = '';
-        tasksListSaturday.innerHTML = '';
-        tasksListSunday.innerHTML = '';
+        tasksList[!4].innerHTML = '';
         
       } else if (daySelected === 'Saturday') {
         dayNumber = 5;
-        tasksListMonday.innerHTML = '';
-        tasksListTuesday.innerHTML = '';
-        tasksListWednesday.innerHTML = '';
-        tasksListThursday.innerHTML = '';
-        tasksListFriday.innerHTML = '';
-        tasksListSunday.innerHTML = '';
+        tasksList[!5].innerHTML = '';
 
       } else if (daySelected === 'Sunday') {
         dayNumber = 6;
-        tasksListMonday.innerHTML = '';
-        tasksListTuesday.innerHTML = '';
-        tasksListWednesday.innerHTML = '';
-        tasksListThursday.innerHTML = '';
-        tasksListFriday.innerHTML = '';
-        tasksListSaturday.innerHTML = '';
+        tasksList[!6].innerHTML = '';
 
       }
     })
-  })
-      
+  })      
+
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    
     if (daySelected === null) {
       showNotification("Please select a day first");
     }
@@ -187,7 +125,8 @@ window.addEventListener('load', ()=> {
         };
       }    
   };
-      
+
+
   function renderTasks() {
     const taskArrays = {
       'Monday': tasksMonday,
@@ -213,20 +152,20 @@ window.addEventListener('load', ()=> {
     const taskList = taskListElements[daySelected];
 
     if (tasks.length === 0) {
-        taskList.innerHTML = `<center>No tasks on ${daySelected}!</center>`;
-        return;
+      taskList.innerHTML = `<center>No tasks on ${daySelected}!</center>`;
+      return;
     }
 
     taskList.innerHTML = '';
 
     tasks.forEach((task, index) => {
-        taskList.innerHTML += `
-            <div class="task" id=${index}>
-                <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
-                <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
-                <i class="deleteButton" data-action="delete"></i>
-            </div>
-        `;
+      taskList.innerHTML += `
+        <div class="task" id=${index}>
+          <p class="${task.checked ? 'checked' : ''}" data-action="check">${task.value}</p>
+          <i class="${task.checked ? 'checkedButton' : 'uncheckedButton'}" data-action="check"></i>
+          <i class="deleteButton" data-action="delete"></i>
+        </div>
+      `;
     });
   }
 
@@ -274,7 +213,7 @@ window.addEventListener('load', ()=> {
     action === 'check' && checkTask(taskId);
     action === 'delete' && deleteTask(taskId);
   }
-      
+
   // checks off a task
   function checkTask(taskId) {
     const taskArrays = {
@@ -318,10 +257,10 @@ window.addEventListener('load', ()=> {
     const arrayName = taskArrays[daySelected];
 
     if (arrayName && window[arrayName]) {
-        window[arrayName] = window[arrayName].filter((task, index) => index !== taskId);
+      window[arrayName] = window[arrayName].filter((task, index) => index !== taskId);
 
-        renderTasks();
-        localStorage.setItem(arrayName, JSON.stringify(window[arrayName]));
+      renderTasks();
+      localStorage.setItem(arrayName, JSON.stringify(window[arrayName]));
     }
   }
 
