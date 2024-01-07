@@ -1,3 +1,4 @@
+localStorage.clear();
 window.addEventListener('load', ()=> {
   const form = document.getElementById('taskForm');
   const taskInput = document.getElementById('newTask');
