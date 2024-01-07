@@ -46,33 +46,36 @@ window.addEventListener('load', ()=> {
     tasksSaturday = JSON.parse(localStorage.getItem('tasksSaturday')) || [],
     tasksSunday = JSON.parse(localStorage.getItem('tasksSunday')) || [],
   ]
-  let fruits = ['apple', 'banana', 'grape', 'strawberry'];
 
-  dayBtns.forEach(button => {
+  dayBtns.forEach((button, index) => {
     button.addEventListener('click', function() {
       dayBtns.forEach(btn => btn.classList.remove('active'));
       this.classList.add('active');
       daySelected = this.textContent;
       renderTasks();
-
-      const taskLists = {
-        'Monday': tasksListMonday,
-        'Tuesday': tasksListTuesday,
-        'Wednesday': tasksListWednesday,
-        'Thursday': tasksListThursday,
-        'Friday': tasksListFriday,
-        'Saturday': tasksListSaturday,
-        'Sunday': tasksListSunday
-      };
-      for (const [day, taskList] of Object.entries(taskLists)) {
-        if (day !== daySelected) {
+  
+      tasksList = [
+        tasksListMonday, 
+        tasksListTuesday, 
+        tasksListWednesday, 
+        tasksListThursday, 
+        tasksListFriday, 
+        tasksListSaturday, 
+        tasksListSunday
+      ];
+  
+      // determines the dayNumber based on the index of the button
+      dayNumber = index;
+  
+      // clears the innerHTML of all tasksList elements except the selected one
+      tasksList.forEach((taskList, i) => {
+        if (i !== dayNumber) {
           taskList.innerHTML = '';
         }
-      }
-      dayNumber = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    })
-  })      
-
+      });
+    });
+  });
+  
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     if (daySelected === null) {
@@ -87,14 +90,14 @@ window.addEventListener('load', ()=> {
     }
   });
       
-  // saves tasksMonday that the user adds to checklist
+  // saves tasks that the user adds to checklist
   function saveTask() {
     const taskValue = taskInput.value;
     
-    // check if the task list is empty
+    // checks if the task list is empty
     const emptyTask = taskValue === '';
       
-    // check for duplicate tasks in the same list
+    // checks for duplicate tasks in the same list
     if (daySelected === daysArray[dayNumber]) {
       const presentTask = tasksAllDays[dayNumber].some((task) => task.value.toUpperCase() === taskValue.toUpperCase());
         if (emptyTask) {
@@ -155,52 +158,28 @@ window.addEventListener('load', ()=> {
       `;
     });
   }
-
-  tasksListMonday.addEventListener('click', (event) => {
-    tasksListClicked();
+  
+  tasksLists.forEach(tasksList => {
+    tasksList.addEventListener('click', tasksListClicked);
   });
-
-  tasksListTuesday.addEventListener('click', (event) => {
-    tasksListClicked();
-  });
-
-  tasksListWednesday.addEventListener('click', (event) => {
-    tasksListClicked();
-  });
-
-  tasksListThursday.addEventListener('click', (event) => {
-    tasksListClicked();
-  });
-
-  tasksListFriday.addEventListener('click', (event) => {
-    tasksListClicked();
-  });
-
-  tasksListSaturday.addEventListener('click', (event) => {
-    tasksListClicked();
-  });
-
-  tasksListSunday.addEventListener('click', (event) => {
-    tasksListClicked();
-  });
-
-  function tasksListClicked() {
+  
+  function tasksListClicked(event) {
     const target = event.target;
     const parentElement = target.parentNode;
       
     if (parentElement.className !== 'task') return;
       
-    // sets an id number to a task
+    // Sets an id number to a task
     const task = parentElement;
     const taskId = Number(task.id);
       
-    // used to retrieve another function
+    // Used to retrieve another function
     const action = target.dataset.action;
       
-    action === 'check' && checkTask(taskId);
-    action === 'delete' && deleteTask(taskId);
+    if (action === 'check') checkTask(taskId);
+    if (action === 'delete') deleteTask(taskId);
   }
-
+  
   // checks off a task
   function checkTask(taskId) {
     const taskArrays = {
