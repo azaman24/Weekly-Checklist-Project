@@ -2,9 +2,10 @@
   --containerHeight: 800px;
   --containerWidth: 800px;
   --headerHeight: 150px;
-  --gray: #46566E;
-  --darkCyan: #1F2937;
   --lightGray: #D3D3D3;
+  --gray: #46566E;
+  --darkGray: #3d4b61;
+  --darkCyan: #1F2937;
   --neonYellow: #FBEC5D;
   --yellow: #FFF000;
   --orange: #FF6A00;
@@ -170,6 +171,10 @@ header {
   border: var(--gray);
   color: #FFF;
   border-radius: 0 0 10px 10px;
+}
+
+.tasksListShown {
+  background-color: var(--green);
 }
 
 #tasksListMonday .task, 
