@@ -120,8 +120,11 @@ header {
   color: #FFF;
   text-align: center;
   margin-top: 15px;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 1.125rem;
+  margin-left: 25%;
+  margin-right: 25%;
+
 }
 
 .dayList {
