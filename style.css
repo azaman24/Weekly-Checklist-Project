@@ -168,6 +168,7 @@ header {
   color: #FFF;
   border-radius: 0 0 10px 10px;
 }
+
 #tasksListMonday .task, 
 #tasksListTuesday .task,
 #tasksListWednesday .task,
@@ -180,6 +181,7 @@ header {
   padding: 1rem 1rem;
   border-radius: 15px;
 }
+
 #tasksListMonday .task:hover, 
 #tasksListTuesday .task:hover,
 #tasksListWednesday .task:hover,
@@ -189,6 +191,7 @@ header {
 #tasksListSunday .task:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
 #tasksListMonday .task *, 
 #tasksListTuesday .task *,
 #tasksListWednesday .task *,
@@ -199,6 +202,7 @@ header {
   cursor: pointer;
   margin-right: 0.5rem;
 }
+
 #tasksListMonday .task i,
 #tasksListTuesday .task i,
 #tasksListWednesday .task i,
@@ -208,6 +212,7 @@ header {
 #tasksListSunday .task i {
   font-size: 0.9rem;
 }
+
 #tasksListMonday .task p, 
 #tasksListTuesday .task p, 
 #tasksListWednesday .task p, 
@@ -233,6 +238,7 @@ header {
 #tasksListSunday .task .uncheckedTask {
   font-size: 20px;
 }
+
 #tasksListMonday .task .uncheckedButton,
 #tasksListTuesday .task .uncheckedButton,
 #tasksListWednesday .task .uncheckedButton,
@@ -248,6 +254,7 @@ header {
   height: 32.5px;
   transition: 0.3s;
 }
+
 #tasksListMonday .task .uncheckedButton:hover,
 #tasksListTuesday .task .uncheckedButton:hover,
 #tasksListWednesday .task .uncheckedButton:hover,
@@ -257,6 +264,7 @@ header {
 #tasksListSunday .task .uncheckedButton:hover {
   background-image: url(images/UncheckedHover.png);
 }
+
 #tasksListMonday .task .checkedButton,
 #tasksListTuesday .task .checkedButton,
 #tasksListWednesday .task .checkedButton,
@@ -272,6 +280,7 @@ header {
   height: 32.5px;
   transition: 0.3s;
 }
+
 #tasksListMonday .task .deleteButton,
 #tasksListTuesday .task .deleteButton,
 #tasksListWednesday .task .deleteButton,
@@ -287,6 +296,7 @@ header {
   height: 32.5px;
   transition: 0.3s;
 }
+
 #tasksListMonday .task .deleteButton:hover,
 #tasksListTuesday .task .deleteButton:hover,
 #tasksListWednesday .task .deleteButton:hover,
