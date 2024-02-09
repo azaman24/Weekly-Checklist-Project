@@ -50,9 +50,8 @@ body {
 #imgTitle {
   display: block;
   position: center;
-  height: 60px;
-  margin-top: 2%;
-  margin-left: 20%;
+  height: 100%;
+  margin-left: 16%;
   margin-right: auto;
 }
 
@@ -106,7 +105,7 @@ header {
 #submitButton {
   cursor: pointer;
   margin: 0 1rem;
-  background-image: url(images/AddTaskDefault.png);
+  background-image: url(images/AddTaskDefault.svg);
   background-size: 40px;
   width: 40px;
   height: 40px;
@@ -114,7 +113,7 @@ header {
 }
 
 #submitButton:hover {
-  background-image: url(images/AddTaskHovered.png);
+  background-image: url(images/AddTaskHovered.svg);
 }
 
 #noDayChosen {
@@ -123,10 +122,8 @@ header {
   margin-top: 15px;
   border: 2px solid white;
   border-radius: 1.125rem;
-  margin-left: 25%;
-  margin-right: 25%;
-  
-  /* margin-right: 25%; */
+  margin-left: 30%;
+  margin-right: 30%;
 
 }
 
@@ -258,7 +255,7 @@ header {
 #tasksListSunday .task .uncheckedButton {
   cursor: pointer;
   margin: 0 1rem;
-  background-image: url(images/Unchecked.png);
+  background-image: url(images/Unchecked.svg);
   background-size: 32.5px;
   width: 32.5px;
   height: 32.5px;
@@ -272,7 +269,7 @@ header {
 #tasksListFriday .task .uncheckedButton:hover,
 #tasksListSaturday .task .uncheckedButton:hover,
 #tasksListSunday .task .uncheckedButton:hover {
-  background-image: url(images/UncheckedHover.png);
+  background-image: url(images/UncheckedHover.svg);
 }
 
 #tasksListMonday .task .checkedButton,
@@ -284,7 +281,7 @@ header {
 #tasksListSunday .task .checkedButton {
   cursor: pointer;
   margin: 0 1rem;
-  background-image: url(images/Checked.png);
+  background-image: url(images/Checked.svg);
   background-size: 32.5px;
   width: 32.5px;
   height: 32.5px;
@@ -300,7 +297,7 @@ header {
 #tasksListSunday .task .deleteButton {
   cursor: pointer;
   margin: 0 1rem;
-  background-image: url(images/Delete.png);
+  background-image: url(images/Delete.svg);
   background-size: 32.5px;
   width: 32.5px;
   height: 32.5px;
@@ -314,7 +311,7 @@ header {
 #tasksListFriday .task .deleteButton:hover,
 #tasksListSaturday .task .deleteButton:hover,
 #tasksListSunday .task .deleteButton:hover {
-  background-image: url(images/DeleteHover.png);
+  background-image: url(images/DeleteHover.svg);
 }
   
 .notification {
